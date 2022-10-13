@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/AthanorLabs/go-relayer-client"
 	"github.com/AthanorLabs/go-relayer/common"
 	mforwarder "github.com/AthanorLabs/go-relayer/examples/minimal_forwarder"
 	"github.com/AthanorLabs/go-relayer/examples/mock_recipient"
-	"github.com/AthanorLabs/go-relayer-client"
 	"github.com/athanorlabs/atomic-swap/ethereum/block"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -22,12 +22,12 @@ import (
 func main() {
 	auth, ec, pk, chainID := setup()
 	forwarderAddr := ethcommon.HexToAddress("0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab")
-	recipientAddress, err := deployMockRecipient(auth, ec, forwarderAddr) 
+	recipientAddress, err := deployMockRecipient(auth, ec, forwarderAddr)
 	if err != nil {
 		panic(err)
 	}
 
-	// transfer to recipient - only for setup, not needed if contract already is funded 
+	// transfer to recipient - only for setup, not needed if contract already is funded
 	value := big.NewInt(1000000)
 	fee := big.NewInt(10000)
 
@@ -84,7 +84,7 @@ func main() {
 		From:  key.Address(),
 		To:    recipientAddress,
 		Value: big.NewInt(0),
-		Gas:   big.NewInt(679639582), // TOOD: fetch from ethclient
+		Gas:   big.NewInt(679639582), // TODO: fetch from ethclient
 		Nonce: nonce,
 		Data:  calldata,
 	}
@@ -112,12 +112,12 @@ func main() {
 	}
 
 	rpcReq := &common.SubmitTransactionRequest{
-		From: req.From,
-		To: req.To,
-		Value: req.Value,
-		Gas: req.Gas,
-		Nonce: req.Nonce,
-		Data: req.Data,
+		From:      req.From,
+		To:        req.To,
+		Value:     req.Value,
+		Gas:       req.Gas,
+		Nonce:     req.Nonce,
+		Data:      req.Data,
 		Signature: sig,
 	}
 
@@ -169,10 +169,10 @@ func setup() (*bind.TransactOpts, *ethclient.Client, *ecdsa.PrivateKey, *big.Int
 }
 
 func deployMockRecipient(
-	auth *bind.TransactOpts, 
-	conn *ethclient.Client, 
+	auth *bind.TransactOpts,
+	conn *ethclient.Client,
 	forwarderAddr ethcommon.Address,
-) (ethcommon.Address, error) { 
+) (ethcommon.Address, error) {
 	address, tx, _, err := mock.DeployMock(auth, conn, forwarderAddr)
 	if err != nil {
 		panic(err)
