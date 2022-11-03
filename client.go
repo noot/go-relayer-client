@@ -3,7 +3,7 @@ package client
 import (
 	"encoding/json"
 
-	"github.com/AthanorLabs/go-relayer/common"
+	"github.com/athanorlabs/go-relayer/common"
 )
 
 type Client struct {

@@ -6,17 +6,17 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/AthanorLabs/go-relayer-client"
-	"github.com/AthanorLabs/go-relayer/common"
-	mforwarder "github.com/AthanorLabs/go-relayer/examples/minimal_forwarder"
-	"github.com/AthanorLabs/go-relayer/examples/mock_recipient"
 	"github.com/athanorlabs/atomic-swap/ethereum/block"
-
+	"github.com/athanorlabs/go-relayer/common"
+	mock "github.com/athanorlabs/go-relayer/examples/mock_recipient"
+	"github.com/athanorlabs/go-relayer/impls/mforwarder"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	ethcommon "github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
+
+	"github.com/athanorlabs/go-relayer-client"
 )
 
 func main() {
